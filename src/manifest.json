@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Wikipedia NoRefs",
   "short_name": "WP NoRefs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Toggle Wikipedia references on and off",
   "homepage_url": "https://github.com/jojje/wikipedia-norefs",
   "developer": {

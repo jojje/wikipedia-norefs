@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "Wikipedia NoRefs",
+  "short_name": "WP NoRefs",
+  "version": "0.1.0",
+  "description": "Toggle Wikipedia references on and off",
+  "homepage_url": "https://github.com/jojje/wikipedia-norefs",
+  "developer": {
+    "name": "jojje",
+    "url": "https://github.com/jojje/"
+  },
+
+  "permissions": [
+    "https://*.wikipedia.org/wiki/*",
+    "activeTab"
+  ],
+  "content_scripts": [{
+    "matches": ["https://*.wikipedia.org/wiki/*"],
+    "js": ["content.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "48": "icons/enabled-48-blue.png",
+      "128": "icons/enabled-128-blue.png"
+    }
+  },
+  "icons": {
+    "48": "icons/enabled-48-blue.png",
+    "128": "icons/enabled-128-blue.png"
+  }
+}

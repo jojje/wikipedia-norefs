@@ -3,7 +3,7 @@
 
 "use strict";
 
-const EXT_NAME = 'Toggle Wikipedia references';
+const EXT_NAME = 'Wikipedia NoRefs';
 const WHITE_LIST = new RegExp('https://.*\.wikipedia.org/wiki/.*');
 const DEBUG = false;
 
@@ -72,7 +72,7 @@ chrome.pageAction.onClicked.addListener((tab) => {
 });
 
 // make user's choice stickily reflect in the UI, so the last choice is retained for new tabs or page loads, until the user toggles the extension again.
-browser.tabs.onUpdated.addListener((tabId, info, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
     updateUI(tab);
 }, {properties: ['url']});  // subscribe only to page load events (url changes) to avoid redundant updates
 

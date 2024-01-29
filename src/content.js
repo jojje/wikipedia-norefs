@@ -35,16 +35,18 @@ function onStateUpdate(state) {
     else showRefs();
 }
 
-// subsequent state synchronization
-chrome.runtime.onMessage.addListener((message) => {
+function syncState() {
+    chrome.runtime.sendMessage('isEnabled',(response) => {
+        debug('got response:', response);
+        onStateUpdate(response);
+    });
+}
+
+window.addEventListener('pageshow', syncState);       // force a check on page load so that the page state is adjusted as per the extension's icon state
+
+chrome.runtime.onMessage.addListener((message) => {   // react to user toggling, on an already loaded page
     debug('got message:', message);
     onStateUpdate(message);
-});
-
-// initial state synchronization (special case)
-chrome.runtime.sendMessage('isEnabled',(response) => {
-    debug('got response:', response);
-    onStateUpdate(response);
 });
 
 debug('initialized');

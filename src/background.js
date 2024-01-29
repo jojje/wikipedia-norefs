@@ -6,6 +6,7 @@
 const EXT_NAME = 'Wikipedia NoRefs';
 const WHITE_LIST = new RegExp('https://.*\.wikipedia.org/wiki/.*');
 const DEBUG = false;
+const isWhitelisted = (url) => WHITE_LIST.test(url);
 
 let enabled = true;  // hide refs by default (why else install this extension...)
 
@@ -46,7 +47,7 @@ function updateTitle(tabId) {
 }
 
 function updateUI(tab) {
-    if (!WHITE_LIST.test(tab.url)) {  // only activate on intended pages (workaround for manifest
+    if (!isWhitelisted(tab.url)) {    // only activate on intended pages (workaround for manifest
         return;                       // "default_icon:{}" & "show_matches":[] extension icon flicker when loading pages)
     }
     chrome.pageAction.show(tab.id);

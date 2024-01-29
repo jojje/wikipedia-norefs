@@ -1,3 +1,5 @@
 *-white.png
+build
 dist
 .vscode
+web/screenshot_chrome*.png

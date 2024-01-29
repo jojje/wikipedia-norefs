@@ -8,6 +8,14 @@ const WHITE_LIST = new RegExp('https://.*\.wikipedia.org/wiki/.*');
 const DEBUG = false;
 const isWhitelisted = (url) => WHITE_LIST.test(url);
 
+// compat shim to harmonize API between manifest v2 and v3 (FF vs Chrome)
+const action = chrome.pageAction || {
+    setIcon: chrome.action.setIcon,
+    setTitle: chrome.action.setTitle,
+    onClicked: chrome.action.onClicked,
+    show: () => undefined
+};
+
 let enabled = true;  // hide refs by default (why else install this extension...)
 
 function debug(...args) {
@@ -26,7 +34,7 @@ function notify(message) {
 function updateIcon(tabId) {
     const stem = enabled ? 'enabled' : 'disabled';
     debug('updating icon {enabled:',enabled, 'tabId:', tabId, 'stem:', stem, '}');
-    chrome.pageAction.setIcon({
+    action.setIcon({
         tabId: tabId,
         path: {
             48: `icons/${stem}-48-blue.png`,
@@ -40,7 +48,7 @@ function updateTitle(tabId) {
     const sideEffect =  enabled ? 'show' : 'hide';
     const newTitle = `${EXT_NAME}: Click to ${sideEffect} references`;
     debug('updating extension title {enabled:',enabled, 'tabId:', tabId, 'newTitle', newTitle, '}');
-    chrome.pageAction.setTitle({
+    action.setTitle({
         tabId: tabId,
         title: newTitle
     });
@@ -50,7 +58,7 @@ function updateUI(tab) {
     if (!isWhitelisted(tab.url)) {    // only activate on intended pages (workaround for manifest
         return;                       // "default_icon:{}" & "show_matches":[] extension icon flicker when loading pages)
     }
-    chrome.pageAction.show(tab.id);
+    action.show(tab.id);
     updateIcon(tab.id);
     updateTitle(tab.id);
 }
@@ -65,7 +73,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 // handle extension icon's click events
-chrome.pageAction.onClicked.addListener((tab) => {
+action.onClicked.addListener((tab) => {
     enabled = !enabled;
     updateUI(tab);
     notify({'enabled': enabled});

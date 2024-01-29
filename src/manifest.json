@@ -5,14 +5,10 @@
   "version": "0.1.1",
   "description": "Toggle Wikipedia references on and off",
   "homepage_url": "https://github.com/jojje/wikipedia-norefs",
-  "developer": {
-    "name": "jojje",
-    "url": "https://github.com/jojje/"
-  },
+  "author": "jojje",
 
   "permissions": [
-    "https://*.wikipedia.org/wiki/*",
-    "activeTab"
+    "https://*.wikipedia.org/wiki/*"
   ],
   "content_scripts": [{
     "matches": ["https://*.wikipedia.org/wiki/*"],

@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 
 // initial state synchronization (special case)
-chrome.runtime.sendMessage('isEnabled').then((response) => {
+chrome.runtime.sendMessage('isEnabled',(response) => {
     debug('got response:', response);
     onStateUpdate(response);
 });

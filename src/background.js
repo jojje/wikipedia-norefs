@@ -57,7 +57,6 @@ function updateUI(tab) {
 // respond to RPC requests from content script (for allowing content scripts to know their initial behavior on page-load)
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request === 'isEnabled') {
-        updateUI(sender.tab);
         const response = {'enabled': enabled};
         debug('got content script command:', request, ', from tab:', sender.url, ', responding:', response);
         sendResponse(response);
@@ -72,8 +71,9 @@ chrome.pageAction.onClicked.addListener((tab) => {
 });
 
 // make user's choice stickily reflect in the UI, so the last choice is retained for new tabs or page loads, until the user toggles the extension again.
-chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if(changeInfo.status !== 'loading') return;   // Update UI as early as possible to reduce icon during a page load.
     updateUI(tab);
-}, {properties: ['url']});  // subscribe only to page load events (url changes) to avoid redundant updates
+});
 
 debug('initialized');

@@ -6,6 +6,10 @@ By default the extension hides citation markers in articles to improve Wikipedia
 
 _Note: the extension only activates and appears on wikipedia wiki pages, so if you're not seeing it, visit [such a page](https://en.wikipedia.org/wiki/Internet_Archive)._
 
+Get it for
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/wikipedia-norefs/)
+* Chrome _[TBD, still in review]_
+
 ## Howto use
 
 When visiting a wikipedia page after installation, citation markers are hidden by default. Whether citations are shown or hidden is reflected in the extension's icon. A line across the icon means markers are hidden. No line, they are shown. Aside from the icon indication, just reading the wiki page should make it obvious which mode is active.

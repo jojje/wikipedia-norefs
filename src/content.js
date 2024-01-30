@@ -24,14 +24,13 @@ function hideRefs() {
 
 function showRefs() {
     const style = findStyle();
-    if (style) {
-        debug('showing refs');
-        style.remove();
-    }
+    if (!style) return;
+    debug('showing refs');
+    style.remove();
 }
 
 function onStateUpdate(state) {
-    if( state && state.enabled) hideRefs();
+    if (state && state.enabled) hideRefs();
     else showRefs();
 }
 

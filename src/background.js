@@ -4,7 +4,7 @@
 "use strict";
 
 const EXT_NAME = 'Wikipedia NoRefs';
-const WHITE_LIST = new RegExp('https://.*\.wikipedia.org/wiki/.*');
+const WHITE_LIST = new RegExp('^https://.*\.wikipedia.org/wiki/.*');
 const DEBUG = false;
 const isWhitelisted = (url) => WHITE_LIST.test(url);
 

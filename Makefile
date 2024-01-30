@@ -1,6 +1,3 @@
-VERSION = $(shell jq -r ".version" src/manifest.json)
-NAME = $(shell jq -r ".name" src/manifest.json | tr " " "_" | tr "[A-Z]" "[a-z]" )-${VERSION}
-
 build: clean
 	@echo -e "\n[*] Firefox build"
 	cp -r src build

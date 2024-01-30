@@ -81,7 +81,7 @@ action.onClicked.addListener((tab) => {
 
 // make user's choice stickily reflect in the UI, so the last choice is retained for new tabs or page loads, until the user toggles the extension again.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if(changeInfo.status !== 'loading') return;   // Update UI as early as possible to reduce icon flicker during a page load.
+    if(changeInfo.status === 'loading') return;   // Update UI as early as possible to reduce icon flicker during a page load.
     updateUI(tab);
 });
 

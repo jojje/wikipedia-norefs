@@ -48,4 +48,6 @@ chrome.runtime.onMessage.addListener((message) => {   // react to user toggling,
     onStateUpdate(message);
 });
 
+syncState();  // force state syncing on initial page load.
+
 debug('initialized');
